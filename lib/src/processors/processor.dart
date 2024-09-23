@@ -31,19 +31,14 @@ import 'package:flutter_flavorizr/src/processors/android/android_dummy_assets_pr
 import 'package:flutter_flavorizr/src/processors/android/android_manifest_processor.dart';
 import 'package:flutter_flavorizr/src/processors/android/icons/android_icons_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/abstract_processor.dart';
-import 'package:flutter_flavorizr/src/processors/commons/copy_file_processor.dart';
-import 'package:flutter_flavorizr/src/processors/commons/copy_folder_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/delete_file_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/download_file_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/dynamic_file_string_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/existing_file_string_processor.dart';
-import 'package:flutter_flavorizr/src/processors/commons/new_file_string_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/queue_processor.dart';
 import 'package:flutter_flavorizr/src/processors/commons/unzip_file_processor.dart';
 import 'package:flutter_flavorizr/src/processors/darwin/darwin_schemas_processor.dart';
 import 'package:flutter_flavorizr/src/processors/darwin/podfile_processor.dart';
-import 'package:flutter_flavorizr/src/processors/flutter/flutter_flavors_processor.dart';
-import 'package:flutter_flavorizr/src/processors/flutter/target/flutter_targets_file_processor.dart';
 import 'package:flutter_flavorizr/src/processors/google/firebase/firebase_processor.dart';
 import 'package:flutter_flavorizr/src/processors/huawei/agconnect/agconnect_processor.dart';
 import 'package:flutter_flavorizr/src/processors/ide/ide_processor.dart';
@@ -76,13 +71,6 @@ class Processor extends AbstractProcessor<void> {
     'android:dummyAssets',
     'android:icons',
     'android:adaptiveIcons',
-
-    // Flutter
-    'flutter:flavors',
-    'flutter:app',
-    'flutter:pages',
-    'flutter:main',
-    'flutter:targets',
 
     // iOS
     'ios:podfile',
@@ -195,33 +183,6 @@ class Processor extends AbstractProcessor<void> {
             config: flavorizr,
           ),
       'android:icons': () => AndroidIconsProcessor(
-            config: flavorizr,
-          ),
-
-      //Flutter
-      'flutter:flavors': () => NewFileStringProcessor(
-            K.flutterFlavorPath,
-            FlutterFlavorsProcessor(config: flavorizr),
-            config: flavorizr,
-          ),
-      'flutter:app': () => CopyFileProcessor(
-            K.tempFlutterAppPath,
-            K.flutterAppPath,
-            config: flavorizr,
-          ),
-      'flutter:pages': () => CopyFolderProcessor(
-            K.tempFlutterPagesPath,
-            K.flutterPagesPath,
-            config: flavorizr,
-          ),
-      'flutter:main': () => CopyFileProcessor(
-            K.tempFlutterMainPath,
-            K.flutterMainPath,
-            config: flavorizr,
-          ),
-      'flutter:targets': () => FlutterTargetsFileProcessor(
-            K.tempFlutterMainTargetPath,
-            K.flutterPath,
             config: flavorizr,
           ),
 
